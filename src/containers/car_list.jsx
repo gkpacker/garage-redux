@@ -1,34 +1,28 @@
-import  React, { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux';
+
+import fetchCars from '../actions';
+import Car from '../components/car';
 
 class CarList extends Component {
-  renderCar(car) {
-    return (
-      <Link key={car.id} to={`/cars/${car.id}`} >
-        <li className='car-smallad'>
-          <img src="assets/images/kombi.jpg" className='car-logo' alt=""/>
-          <div className="car-details">
-            <span>{`${car.brand} - ${car.model}`}</span>
-            <ul>
-              <li>{`Owner: ${car.owner}`}</li>
-            </ul>
-          </div>
-        </li>
-      </Link>
-    )
+  componentWillMount() {
+    const { garageName } = this.props;
+
+    this.props.fetchCars(garageName);
   }
 
   render() {
-    if (this.props.car === []) {
-      debugger
-      return <div className='no-car'>EMPTY</div>
+    const { cars } = this.props;
+
+    if (cars === []) {
+      return <div className="no-car">EMPTY</div>;
     }
 
     return (
-      <div className='list-container'>
+      <div className="list-container">
         <ul>
-          {this.props.cars.map(this.renderCar)}
+          {cars.map(car => <Car key={car.id} car={car} />)}
         </ul>
       </div>
     );
@@ -36,7 +30,17 @@ class CarList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { cars: state.cars };
+  return {
+    cars: state.cars,
+    garageName: state.garageName
+  };
 }
 
-export default connect(mapStateToProps)(CarList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { fetchCars },
+    dispatch
+  );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CarList);
