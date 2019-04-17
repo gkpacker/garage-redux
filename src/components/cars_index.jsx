@@ -1,14 +1,14 @@
 import React from 'react';
-import CarList from '../containers/car_list'
-import Garage from '../containers/garage'
+import CarList from '../containers/car_list';
+import Garage from '../containers/garage';
 
-const carsIndex = () => {
+const CarsIndex = () => {
   return (
-    <div className='view-container'>
+    <div className="view-container">
       <Garage />
       <CarList />
     </div>
-  )
-}
+  );
+};
 
-export default carsIndex;
+export default CarsIndex;
