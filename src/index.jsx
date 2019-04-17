@@ -11,6 +11,8 @@ import '../assets/stylesheets/application.scss';
 
 import carsReducer from './reducers/cars_reducer';
 
+import carsIndex from './components/cars_index';
+
 const identityReducer = (state = null, action) => state;
 
 const reducers = combineReducers({
@@ -30,7 +32,7 @@ ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
     <Router history={history}>
       <Switch>
-        TODO
+        <Route path='/' exact component={carsIndex} />
       </Switch>
     </Router>
   </Provider>,
