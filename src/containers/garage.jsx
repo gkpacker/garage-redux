@@ -1,22 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-const Garage = ({ garageName }) => {
+const Garage = ({ garage, children }) => {
   return (
-    <div className="aside">
-      <div className="illustration" />
-      <img src="assets/images/kombi.jpg" alt="kombi" className="logo" />
-      <h1>{garageName}</h1>
-      <Link to="/new">
-        <p>New Car</p>
-      </Link>
+    <div className="garage">
+      <div className="illustration" style={{ backgroundImage: "url('/assets/images/garage_bg.jpg')" }} />
+      <img className="logo" src="/assets/images/kombi.jpg" alt="logo" />
+      <h1>{garage}</h1>
+      <p>
+        Our garage is the best.
+        Reasonable prices, always on time, we are the best (and fictionnal).
+      </p>
+      {children}
     </div>
   );
 };
 
 function mapStateToProps(state) {
-  return { garageName: state.garageName };
+  return { garage: state.garage };
 }
 
 export default connect(mapStateToProps)(Garage);
