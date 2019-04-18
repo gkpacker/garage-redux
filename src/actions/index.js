@@ -12,6 +12,16 @@ export function fetchCars(garage) {
   };
 }
 
+export function fetchCar(id) {
+  const promise = fetch(`https://wagon-garage-api.herokuapp.com/cars/${id}`)
+    .then(response => response.json());
+
+  return {
+    type: FETCH_CAR,
+    payload: promise
+  };
+}
+
 export function createCar(garage, body, callback) {
   const promise = fetch(
     `https://wagon-garage-api.herokuapp.com/${garage}/cars`, {
