@@ -6,23 +6,25 @@ import reduxPromise from 'redux-promise';
 import logger from 'redux-logger';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createHistory as history } from 'history';
+import { reducer as formReducer } from 'redux-form';
 
 import '../assets/stylesheets/application.scss';
 
 import carsReducer from './reducers/cars_reducer';
 
-import carsIndex from './components/cars_index';
-
-const identityReducer = (state = null, action) => state;
+import CarsIndex from './components/cars_index';
+import CarsNew from './components/cars_new';
+import CarsShow from './components/cars_show';
 
 const reducers = combineReducers({
   cars: carsReducer,
-  garageName: identityReducer
+  garage: (state = null, action) => state,
+  form: formReducer
 });
 
 const initialState = {
   cars: [],
-  garageName: "Packer's garage" // TODO: prompt user || anon garage
+  garage: "Packer's garage" // TODO: prompt user || anon garage
 };
 
 const middlewares = applyMiddleware(reduxPromise, logger);
@@ -31,10 +33,13 @@ const middlewares = applyMiddleware(reduxPromise, logger);
 ReactDOM.render(
   <Provider store={createStore(reducers, initialState, middlewares)}>
     <Router history={history}>
-      <Switch>
-        <Route path="/" exact component={CarsIndex} />
-        <Route path="/new" exact component={CarsNew} />
-      </Switch>
+      <div className="view-container">
+        <Switch>
+          <Route path="/" exact component={CarsIndex} />
+          <Route path="/cars/new" exact component={CarsNew} />
+          <Route path="/cars/:id" component={CarsShow} />
+        </Switch>
+      </div>
     </Router>
   </Provider>,
   document.getElementById('root')
