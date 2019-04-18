@@ -46,7 +46,7 @@ ul {
   flex-grow: 1;
 }
 
-.aside {
+.garage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,24 +70,24 @@ ul {
   z-index: 1;
 }
 
-.aside > h1 {
+.garage > h1 {
   font-size: 1.6em;
   margin: 1em 0;
 }
 
-.aside > img {
+.garage > img {
   width: 90px;
   height: 90px;
 }
 
-.aside > a {
+.garage > a {
   padding: 10px 17px;
   border-radius: 4px;
   border: 1px solid black;
   font-weight: 600;
 }
 
-.aside > p {
+.garage > p {
   padding: 0 20px;
   margin-bottom: 30px;
   font-size: 14px;
@@ -219,6 +219,7 @@ form {
 
 label {
   font-weight: 600;
+  text-transform:capitalize;
 }
 
 button {
