@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Garage from '../containers/garage';
-import { fetchCar } from '../actions';
+import { fetchCar, deleteCar } from '../actions';
 
 class CarsShow extends Component {
   componentWillMount() {
@@ -13,6 +13,16 @@ class CarsShow extends Component {
     if (!car) {
       this.props.fetchCar(id);
     }
+  }
+
+  handleClick = () => {
+    const { car } = this.props;
+
+    this.props.deleteCar(car.id, (response) => {
+      this.props.history.push('/');
+
+      return response;
+    });
   }
 
   render() {
@@ -36,16 +46,21 @@ class CarsShow extends Component {
       </Garage>,
       <div key="car" className="car-container">
         <div className="car-card">
-          <img className="car-picture" alt="car" />
+          <img
+            className="car-picture"
+            src={`https://source.unsplash.com/220x200/?${car.brand}%20${car.model}&sig=${Math.random()}`}
+            alt="car"
+          />
           <div className="car-details">
             <span>{`${car.brand} - ${car.model}`}</span>
             <ul>
-              <li>Owner: {car.owner}</li>
+              <li><strong>Owner</strong>: {car.owner}</li>
             </ul>
+            <span className="plate">{car.plate}</span>
           </div>
-          <div className="plate">{car.plate}</div>
-          <button className="delete">
-            <i className="" />
+          <button className="delete" onClick={this.handleClick} >
+            <i className="fas fa-trash-alt" />
+            Delete
           </button>
         </div>
       </div>
@@ -60,7 +75,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCar }, dispatch);
+  return bindActionCreators({ fetchCar, deleteCar }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarsShow);

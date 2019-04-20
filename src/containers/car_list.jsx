@@ -14,17 +14,16 @@ class CarList extends Component {
 
   renderCar = (car) => {
     return (
-      <Link key={car.id} to={`/cars/${car.id}`} >
-        <li className="car-smallad">
-          <img src="assets/images/kombi.jpg" className="car-logo" alt="" />
-          <div className="car-details">
-            <span>{`${car.brand} - ${car.model}`}</span>
-            <ul>
-              <li>Owner: {car.owner}</li>
-            </ul>
-          </div>
-        </li>
-      </Link>
+      <div className="car-smallad">
+        <Link key={car.id} to={`/cars/${car.id}`} />
+        <img src={`https://source.unsplash.com/120x180/?${car.brand}%20${car.model}&sig=${Math.random()}`} className="car-logo" alt="" />
+        <div className="car-details">
+          <span>{`${car.brand} - ${car.model}`}</span>
+          <ul>
+            <li><strong>Owner:</strong> {car.owner}</li>
+          </ul>
+        </div>
+      </div>
     );
   }
 
