@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createCar } from '../actions';
+import { required, plateFormat } from '../common/field_validations';
 
 class CarForm extends Component {
   onSubmit = (values) => {
@@ -14,49 +15,56 @@ class CarForm extends Component {
     });
   }
 
-  renderField = (field) => {
+  renderField = ({ label, type, input, meta: { touched, error, warning } }) => {
     return (
       <div className="form-group">
-        <label htmlFor={field.label}>{field.label}</label>
+        <label htmlFor={label}>{label}</label>
         <input
-          type={field.type}
+          type={type}
           className="form-control"
-          {...field.input}
+          {...input}
         />
+        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
       </div>
     );
   }
 
   render() {
+    const { invalid, submitting, handleSubmit } = this.props;
+
     return (
       <div className="form-container">
         <div className="overlay" />
-        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <form onSubmit={handleSubmit(this.onSubmit)}>
           <Field
             name="brand"
             label="brand"
             component={this.renderField}
             type="text"
+            validate={[required]}
           />
           <Field
             name="model"
             label="model"
             component={this.renderField}
             type="text"
+            validate={[required]}
           />
           <Field
             name="owner"
             label="owner"
             component={this.renderField}
             type="text"
+            validate={[required]}
           />
           <Field
             name="plate"
             label="plate"
             component={this.renderField}
             type="text"
+            validate={[required, plateFormat]}
           />
-          <button type="submit">Add car</button>
+          <button type="submit" disabled={submitting || invalid} >Add car</button>
         </form>
       </div>
     );
