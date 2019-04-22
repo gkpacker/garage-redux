@@ -5,7 +5,7 @@ const Garage = ({ garage, children }) => {
   return (
     <div className="garage">
       <div className="illustration" style={{ backgroundImage: "url('/assets/images/garage_bg.jpg')" }} />
-      <img className="logo" src="/assets/images/kombi.jpg" alt="logo" />
+      <img className="logo" src="/assets/images/logo.png" alt="logo" />
       <h1>{garage}</h1>
       <p>
         Our garage is the best.

@@ -8,7 +8,7 @@ const CarsIndex = () => {
     <Garage key="garage" >
       <Link to="/cars/new">New Car</Link>
     </Garage>,
-    <CarList />
+    <CarList key="car_list" />
   ];
 };
 
