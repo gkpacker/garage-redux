@@ -24,7 +24,7 @@ const reducers = combineReducers({
 
 const initialState = {
   cars: [],
-  garage: "Packer's garage" // TODO: prompt user || anon garage
+  garage: prompt("What's your garage name?") || `garage${Math.floor(10 + (Math.random() * 90))}`
 };
 
 const middlewares = applyMiddleware(reduxPromise, logger);
