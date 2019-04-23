@@ -1,14 +1,28 @@
-# redux-router-boilerplate
+# garage-redux ![language](https://img.shields.io/badge/language-javascript-blue.svg)
 
-Simple React + Router + Redux starter with the following config:
+> Mini app built to learn more about React-Routes &amp; React-Form
 
-- React, ReactDOM
-- Redux, React-Redux
-- React-Router-DOM
-- Webpack 3
-- Babel with es2015 and react presets
-- Bootstrap (css only, loaded from a cdn in `index.html`)
-- work with `.js` or `.jsx` files
-- main `application.scss` stylesheet is imported in `index.js` as a module to enjoy hot reloading
+## :books: Table of Contents
 
-⚠️This can't be deployed on GitHub Pages, it needs a Node.js setup for the back-end as the paths need to be dynamically linked back to `index.html`.
+- [Installation](#package-installation)
+- [Usage](#rocket-usage)
+- [Features](#star-features)
+
+## :package: Installation
+
+```sh
+git clone git@github.com:gkpacker/garage-redux.git
+cd garage-redux
+yarn install
+```
+
+## :rocket: Usage
+
+```sh
+$ yarn start
+```
+
+## :star: Features
+
+* Semi-CRUD (without update) for cars in a garage
+* Presence/Format validation on the plate license (should be all caps and no special characters)
